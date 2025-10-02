@@ -13,6 +13,7 @@
     .small{font-size:13px;margin-top:6px}
     .linkbtn{background:transparent;border:0;color:#9fb9ff;cursor:pointer}
     .label{display:block;text-align:left;font-size:13px;margin-top:6px;color:#9fb9ff}
+    #msg{min-height:18px}
   </style>
 </head>
 <body>
@@ -21,10 +22,10 @@
     <div id="msg" style="color:#ffcccb"></div>
 
     <label class="label" for="user">Email or Username</label>
-    <input id="user" type="text" placeholder="Email or Username" required />
+    <input id="user" type="text" placeholder="Email or Username" autocomplete="username" />
 
     <label class="label" for="password">Password</label>
-    <input id="password" type="password" placeholder="Password" required />
+    <input id="password" type="password" placeholder="Password" autocomplete="current-password" />
 
     <button id="login">Login</button>
     <div class="small">Not registered? <button class="linkbtn" id="toRegister">Register</button></div>
@@ -34,26 +35,57 @@
     document.getElementById("toRegister").onclick = ()=> location.href="register.html";
 
     document.getElementById("login").onclick = ()=>{
-      const userInput = document.getElementById("user").value.trim();
+      const userInputRaw = document.getElementById("user").value.trim();
       const pass = document.getElementById("password").value;
       const msg = document.getElementById("msg");
       msg.textContent="";
 
-      if(!userInput || !pass){ msg.textContent="Please fill all fields"; return; }
+      if(!userInputRaw || !pass){ msg.textContent="Please fill all fields"; return; }
 
-      let users = JSON.parse(localStorage.getItem("users")||"[]");
-      // check either email or username match
-      let user = users.find(u => (u.email===userInput || u.username.toLowerCase()===userInput.toLowerCase()) && u.password===pass);
+      const inputLower = userInputRaw.toLowerCase();
 
-      if(!user){ msg.textContent="Invalid credentials"; return; }
+      // load users safely
+      let users = [];
+      try { users = JSON.parse(localStorage.getItem("users") || "[]"); } catch(e){ users = []; }
+
+      // find user by email (case-insensitive) OR by username (case-insensitive)
+      let user = users.find(u => {
+        if(!u) return false;
+        const emailMatch = typeof u.email === 'string' && u.email.toLowerCase() === inputLower;
+        const usernameMatch = typeof u.username === 'string' && u.username.toLowerCase() === inputLower;
+        const passwordMatch = u.password === pass;
+        return passwordMatch && (emailMatch || usernameMatch);
+      });
+
+      if(!user){
+        msg.textContent="Invalid email/username or password";
+        return;
+      }
 
       // set logged-in info
       localStorage.setItem("loggedInUser", user.email);
-      localStorage.setItem("loggedInUsername", user.username);
+
+      // if username exists use it, otherwise fallback to email local part (before @)
+      if(user.username && user.username.trim() !== ""){
+        localStorage.setItem("loggedInUsername", user.username);
+      } else {
+        const localPart = (user.email || "").split("@")[0] || user.email;
+        localStorage.setItem("loggedInUsername", localPart);
+      }
 
       // redirect to player dashboard
       location.href="player.html";
     }
+
+    // convenience: allow Enter key to submit form
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Enter'){
+        const active = document.activeElement;
+        if(active && (active.id === 'user' || active.id === 'password')){
+          document.getElementById('login').click();
+        }
+      }
+    });
   </script>
 </body>
 </html>
