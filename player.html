@@ -45,11 +45,25 @@ main{flex:1}
   cursor:pointer;
   transition:transform .15s ease, box-shadow .2s ease;
   z-index:999;
-  box-shadow:0 6px 20px rgba(24, 90, 217, 0.18);
   overflow:hidden;
+  box-shadow:0 6px 20px rgba(24, 90, 217, 0.18);
 }
 .discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24, 90, 217, 0.26) }
 .discord-btn:active{ transform:translateY(0) scale(.99) }
+
+/* Hamburger menu */
+#hamburgerMenu{ position:fixed; top:20px; left:20px; z-index:1000; cursor:pointer; }
+#hamburgerMenu div{ width:30px; height:3px; background:white; margin:6px 0; transition:0.3s; }
+
+/* Side menu */
+#sideMenu{
+  position:fixed; top:0; left:-260px; width:260px; height:100vh;
+  background:rgba(15,23,36,0.95); backdrop-filter:blur(10px);
+  padding-top:80px; z-index:998; transition:0.3s;
+}
+#sideMenu ul{ list-style:none; padding:0; margin:0; color:white; font-size:18px; }
+#sideMenu li{ padding:16px 24px; cursor:pointer; }
+#sideMenu li:hover{ background:rgba(31,119,255,0.2); }
 
 /* Hero card */
 .hero{
@@ -72,7 +86,6 @@ main{flex:1}
   overflow:hidden;
   cursor:pointer;
   transition:box-shadow .25s ease, transform .18s ease, filter .25s ease;
-  user-select:none;
 }
 .card:hover{
   box-shadow:0 16px 60px rgba(2,6,23,0.7), 0 0 60px rgba(27,102,255,0.09);
@@ -142,7 +155,6 @@ h2{
   overflow:hidden;
   transition:transform .18s ease, box-shadow .22s ease, filter .25s ease, opacity .8s ease;
   cursor:pointer;
-  user-select:none;
   opacity:0;
   transform:translateY(30px);
 }
@@ -228,6 +240,20 @@ footer a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
+
+<!-- Hamburger Menu -->
+<div id="hamburgerMenu">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+<nav id="sideMenu">
+  <ul>
+    <li id="menuAbout">About</li>
+  </ul>
+</nav>
+
+<!-- Discord Button -->
 <button class="discord-btn" id="discordBtn">Join Discord</button>
 
 <main>
@@ -305,6 +331,37 @@ const appearOnScroll = new IntersectionObserver((entries)=>{
   });
 }, appearOptions);
 faders.forEach(fader=>appearOnScroll.observe(fader));
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburgerMenu');
+const sideMenu = document.getElementById('sideMenu');
+const menuAbout = document.getElementById('menuAbout');
+let menuOpen = false;
+
+hamburger.addEventListener('click', ()=>{
+  menuOpen = !menuOpen;
+  if(menuOpen){
+    sideMenu.style.left = '0';
+    hamburger.children[0].style.transform = 'rotate(45deg) translate(5px,5px)';
+    hamburger.children[1].style.opacity = '0';
+    hamburger.children[2].style.transform = 'rotate(-45deg) translate(6px,-6px)';
+  }else{
+    sideMenu.style.left = '-260px';
+    hamburger.children[0].style.transform = 'rotate(0deg) translate(0,0)';
+    hamburger.children[1].style.opacity = '1';
+    hamburger.children[2].style.transform = 'rotate(0deg) translate(0,0)';
+  }
+});
+
+// About click → scroll to top
+menuAbout.addEventListener('click', ()=>{
+  window.scrollTo({ top:0, behavior:'smooth' });
+  sideMenu.style.left='-260px';
+  menuOpen=false;
+  hamburger.children[0].style.transform='rotate(0deg) translate(0,0)';
+  hamburger.children[1].style.opacity='1';
+  hamburger.children[2].style.transform='rotate(0deg) translate(0,0)';
+});
 </script>
 </body>
 </html>
