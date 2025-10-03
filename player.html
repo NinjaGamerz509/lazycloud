@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>LAZY CLOUD - Dashboard</title>
 <style>
@@ -192,8 +192,8 @@ footer{
   color:var(--muted);
   border-top:1px solid rgba(19,34,53,0.6);
 }
-footer a{ color:var(--muted); text-decoration:none; margin:0 10px; font-weight:600 }
-footer a:hover{ color:var(--accent-2); text-decoration:underline; }
+footer a{color:#7ab2ff;text-decoration:none;margin:0 10px;cursor:pointer;}
+footer a:hover{text-decoration:underline;}
 
 /* Responsive tweaks */
 @media (max-width:820px){
@@ -209,9 +209,11 @@ footer a:hover{ color:var(--accent-2); text-decoration:underline; }
 </style>
 </head>
 <body>
+<!-- Discord button fixed top-right -->
 <button class="discord-btn" id="discordBtn">Join Discord</button>
 
 <main>
+<!-- Hero Section -->
 <div class="hero">
   <div class="card btn-shine" id="heroCard">
     <div class="shine-effect"></div>
@@ -225,6 +227,7 @@ footer a:hover{ color:var(--accent-2); text-decoration:underline; }
   </div>
 </div>
 
+<!-- Why Choose Section -->
 <div class="section">
 <h2>Why Choose Lazy Cloud</h2>
 <p>
@@ -246,12 +249,17 @@ footer a:hover{ color:var(--accent-2); text-decoration:underline; }
 <span style="margin:0 10px;">|</span>
 <a href="privacy.html">Privacy Policy</a>
 <a href="terms.html">Terms</a>
-<a href="contact.html">Contact Us</a>
+<a id="contactBtn">Contact Us</a>
 </footer>
 
 <script>
 // Discord button
 document.getElementById('discordBtn').addEventListener('click', ()=>{
+  window.open('https://discord.gg/5hx3wJCnd9','_blank');
+});
+
+// Footer Contact Us direct Discord
+document.getElementById('contactBtn').addEventListener('click', ()=>{
   window.open('https://discord.gg/5hx3wJCnd9','_blank');
 });
 
