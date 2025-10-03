@@ -103,7 +103,7 @@
       box-shadow:0 0 20px rgba(0,0,0,0.5);
       text-align:center;
     }
-    .power-btn, .shield-btn{
+    .icon-btn{
       font-size:40px;
       color:#1f77ff;
       background:#07101a;
@@ -134,7 +134,7 @@
       h1{font-size:40px}
       .card{padding:40px 20px}
       .feature-card{padding:28px 18px}
-      .power-btn, .shield-btn{width:64px;height:64px;font-size:34px}
+      .icon-btn{width:64px;height:64px;font-size:34px}
     }
   </style>
 </head>
@@ -164,21 +164,30 @@
     </p>
 
     <div class="features-wrapper">
-      <!-- Feature Card 1: Power / 1-Click -->
-      <div class="feature-card" aria-hidden="false">
-        <div class="power-btn">⚡</div>
+      <!-- Feature Card 1 -->
+      <div class="feature-card">
+        <div class="icon-btn">⚡</div>
         <div class="feature-title">1-Click Mod & Plugin Install</div>
         <div class="feature-desc">
           Install your favorite mods and plugins with just one click.
         </div>
       </div>
 
-      <!-- Feature Card 2: Shield / DDoS Protection -->
-      <div class="feature-card" aria-hidden="false">
-        <div class="shield-btn">🛡️</div>
+      <!-- Feature Card 2 -->
+      <div class="feature-card">
+        <div class="icon-btn">🛡️</div>
         <div class="feature-title">DDoS Protection</div>
         <div class="feature-desc">
           Advanced protection to keep your server safe and online.
+        </div>
+      </div>
+
+      <!-- Feature Card 3 -->
+      <div class="feature-card">
+        <div class="icon-btn">🕑</div>
+        <div class="feature-title">24/7 Uptime Guarantee</div>
+        <div class="feature-desc">
+          Your server stays online around the clock.
         </div>
       </div>
     </div>
