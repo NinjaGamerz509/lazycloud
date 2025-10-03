@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>LAZY CLOUD - Dashboard</title>
 <style>
-/* Disable text selection globally */
+/* Disable text selection completely */
 * { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 
 :root{
@@ -161,26 +161,26 @@ h2{
   margin:0 auto;
 }
 
-/* Shine effect from left only */
+/* Shine effect - left to right, realistic */
 .shine-effect{
   position:absolute;
   top:0;
-  left:-75%;
-  width:50%;
+  left:-100%;
+  width:40%;
   height:100%;
-  background:linear-gradient(90deg, rgba(255,255,255,0.2), rgba(255,255,255,0.05));
+  background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
   transform:skewX(-25deg);
   opacity:0;
   pointer-events:none;
-  border-radius:30%;
+  border-radius:50%;
 }
 .animate-shine .shine-effect{
-  animation:shine-left .6s ease forwards;
+  animation:shine-real 0.8s ease forwards;
 }
-@keyframes shine-left{
-  0%{ left:-75%; opacity:0.6 }
-  50%{ left:100%; opacity:0.2 }
-  100%{ left:100%; opacity:0 }
+@keyframes shine-real{
+  0%{ left:-100%; opacity:0.4; }
+  50%{ left:120%; opacity:0.15; }
+  100%{ left:120%; opacity:0; }
 }
 
 /* Footer */
@@ -250,15 +250,21 @@ footer a:hover{ color:var(--accent-2); text-decoration:underline; }
 </footer>
 
 <script>
+// Discord button
+document.getElementById('discordBtn').addEventListener('click', ()=>{
+  window.open('https://discord.gg/5hx3wJCnd9','_blank');
+});
+
+// Shine effect for all .btn-shine
 const btns = document.querySelectorAll('.btn-shine');
 btns.forEach(el=>{
   el.addEventListener('click', ()=>{
-    el.classList.add('animate-shine');
-    setTimeout(()=> el.classList.remove('animate-shine'), 650);
+    const shine = el.querySelector('.shine-effect');
+    if(shine){
+      el.classList.add('animate-shine');
+      setTimeout(()=> el.classList.remove('animate-shine'), 800);
+    }
   });
-});
-document.getElementById('discordBtn').addEventListener('click', ()=>{
-  window.open('https://discord.gg/5hx3wJCnd9','_blank');
 });
 </script>
 </body>
