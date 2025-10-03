@@ -6,10 +6,6 @@
 <title>LAZY CLOUD - MC Plans</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-/* Disable text selection */
-* { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
-::selection { background: transparent; }
-
 :root {
   --bg:#04101a;
   --card:#0f1724;
@@ -18,7 +14,6 @@
   --muted:#9fb9ff;
   --text:#e6eef8;
 }
-
 body{
   margin:0; padding:0; font-family: 'Poppins', sans-serif;
   background:var(--bg); color:var(--text);
@@ -26,8 +21,6 @@ body{
   min-height:100vh; display:flex; flex-direction:column;
 }
 main{flex:1;}
-
-/* Discord button */
 .discord-btn{
   position:fixed; top:20px; right:20px;
   background:#5865F2; color:#fff;
@@ -39,8 +32,6 @@ main{flex:1;}
 }
 .discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24,90,217,0.26);}
 .discord-btn:active{ transform:translateY(0) scale(.99);}
-
-/* Hamburger Menu */
 .menu-btn{
   position:fixed; top:20px; left:20px; z-index:999;
   display:flex; flex-direction:column; justify-content:space-between;
@@ -62,8 +53,6 @@ main{flex:1;}
   color:#fff; text-decoration:none; margin:12px 0; font-size:18px; font-weight:600;
 }
 .nav-menu a:hover{ color:var(--accent); }
-
-/* Hero section */
 .hero{
   display:flex; align-items:center; justify-content:center;
   min-height:50vh; padding:40px 20px 20px 20px;
@@ -76,8 +65,6 @@ main{flex:1;}
 }
 h1{ font-size:48px; margin:0; font-weight:900; letter-spacing:1px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
 h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
-
-/* Plans wrapper */
 .plans-wrapper{ display:flex; flex-wrap:wrap; gap:24px; justify-content:center; padding:40px 20px; }
 .plan-card{
   background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)), var(--card);
@@ -87,40 +74,26 @@ h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
   cursor:pointer; opacity:0; transform: translateY(30px);
 }
 .plan-card.visible{ opacity:1; transform: translateY(0); }
-.plan-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(15,40,100,0.18); filter: drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
+.plan-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(15,40,100,0.18); filter: drop-shadow(0 0 12px #1f77ff); }
 .plan-icon{ font-size:48px; margin-bottom:12px; }
 .plan-title{ font-size:20px; font-weight:800; margin-bottom:10px; color:#fff; }
 .plan-price-btn{ display:inline-block; background:var(--accent); color:#fff; padding:10px 18px; border-radius:12px; font-weight:700; margin-bottom:16px; pointer-events:none; user-select:none; box-shadow:0 4px 15px rgba(31,119,255,0.3); }
 .plan-features{ list-style:none; padding:0; margin:0; color:#cfe3ff; font-size:15px; line-height:1.6; }
 .plan-features li{ margin-bottom:8px; }
-
-/* Shine effect */
-.shine-effect{ position:absolute; top:0; left:-100%; width:40%; height:100%; background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)); transform:skewX(-25deg); opacity:0; pointer-events:none; border-radius:50%; }
-.btn-shine:hover .shine-effect{ animation:shine-real 0.8s ease forwards; }
-@keyframes shine-real{ 0%{ left:-100%; opacity:0.4; } 50%{ left:120%; opacity:0.15; } 100%{ left:120%; opacity:0; } }
-@keyframes glowPulse{ 0%{ filter:drop-shadow(0 0 12px #1f77ff) brightness(1); } 100%{ filter:drop-shadow(0 0 28px #1f77ff) brightness(1.1); } }
-
-/* Footer */
 footer{ background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding:18px 12px; text-align:center; font-size:14px; color:var(--muted); border-top:1px solid rgba(19,34,53,0.6); }
 footer a{color:#7ab2ff;text-decoration:none;margin:0 10px;cursor:pointer;}
 footer a:hover{text-decoration:underline;}
-
-/* Responsive */
 @media (max-width:1024px){ .plans-wrapper{ flex-direction:column; align-items:center; } }
 @media (max-width:520px){ h1{font-size:34px;} .hero-card{padding:36px 18px;} .plan-card{padding:22px;}}
 </style>
 </head>
 <body>
 
-<!-- Hamburger Menu -->
-<div class="menu-btn" id="menuBtn">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
+<div class="menu-btn" id="menuBtn"><div></div><div></div><div></div></div>
 <nav class="nav-menu" id="navMenu">
   <a href="player.html">About</a>
   <a href="#">MC Plans</a>
+  <a href="vpsplans.html">VPS Plans</a>
 </nav>
 
 <button class="discord-btn" id="discordBtn">Join Discord</button>
@@ -134,28 +107,20 @@ footer a:hover{text-decoration:underline;}
 </div>
 
 <div class="plans-wrapper">
-
-  <!-- Dirt Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">🟫</div><h3 class="plan-title">Dirt Plan</h3><div class="plan-price-btn">₹120 / month</div><ul class="plan-features"><li>4GB DDR5 RAM</li><li>1vCore CPU</li><li>10GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
-
-  <!-- Coal Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">⚫</div><h3 class="plan-title">Coal Plan</h3><div class="plan-price-btn">₹260 / month</div><ul class="plan-features"><li>8GB DDR5 RAM</li><li>2vCore CPU</li><li>20GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
-
-  <!-- Redstone Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">🟥</div><h3 class="plan-title">Redstone Plan</h3><div class="plan-price-btn">₹350 / month</div><ul class="plan-features"><li>10GB DDR5 RAM</li><li>2.5vCore CPU</li><li>25GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
-
-  <!-- Diamond Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">💎</div><h3 class="plan-title">Diamond Plan</h3><div class="plan-price-btn">₹500 / month</div><ul class="plan-features"><li>16GB DDR5 RAM</li><li>4vCore CPU</li><li>40GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
-
-  <!-- Netherite Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">🟪</div><h3 class="plan-title">Netherite Plan</h3><div class="plan-price-btn">₹750 / month<br>$8.17</div><ul class="plan-features"><li>32GB DDR5 RAM</li><li>6vCore CPU</li><li>80GB NVMe SSD</li><li>7x Cloud Backup</li><li>7x Additional Port</li><li>7x Database</li></ul></div>
-
-  <!-- Crown Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">👑</div><h3 class="plan-title">Crown Plan</h3><div class="plan-price-btn">₹1080 / month<br>$12.25</div><ul class="plan-features"><li>48GB DDR5 RAM</li><li>8vCore CPU</li><li>90GB NVMe SSD</li><li>10x Cloud Backup</li><li>10x Additional Port</li><li>10x Database</li></ul></div>
-
-  <!-- Infinity Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">♾️</div><h3 class="plan-title">Infinity Plan</h3><div class="plan-price-btn">₹1800 / month<br>$20.42</div><ul class="plan-features"><li>♾️ GB DDR5 RAM</li><li>♾️ vCore CPU (Ryzen 9)</li><li>♾️ NVMe SSD</li><li>15x Cloud Backup</li><li>15x Additional Port</li><li>15x Database</li></ul></div>
-
+<!-- Dirt Plan -->
+<div class="plan-card"><div class="plan-icon">🟫</div><h3 class="plan-title">Dirt Plan</h3><div class="plan-price-btn">₹120 / month</div><ul class="plan-features"><li>4GB DDR5 RAM</li><li>1vCore CPU</li><li>10GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+<!-- Coal Plan -->
+<div class="plan-card"><div class="plan-icon">⚫</div><h3 class="plan-title">Coal Plan</h3><div class="plan-price-btn">₹260 / month</div><ul class="plan-features"><li>8GB DDR5 RAM</li><li>2vCore CPU</li><li>20GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+<!-- Redstone Plan -->
+<div class="plan-card"><div class="plan-icon">🟥</div><h3 class="plan-title">Redstone Plan</h3><div class="plan-price-btn">₹350 / month</div><ul class="plan-features"><li>10GB DDR5 RAM</li><li>2.5vCore CPU</li><li>25GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+<!-- Diamond Plan -->
+<div class="plan-card"><div class="plan-icon">💎</div><h3 class="plan-title">Diamond Plan</h3><div class="plan-price-btn">₹500 / month</div><ul class="plan-features"><li>16GB DDR5 RAM</li><li>4vCore CPU</li><li>40GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+<!-- Netherite Plan -->
+<div class="plan-card"><div class="plan-icon">🟪</div><h3 class="plan-title">Netherite Plan</h3><div class="plan-price-btn">₹750 / month<br>$8.17</div><ul class="plan-features"><li>32GB DDR5 RAM</li><li>6vCore CPU</li><li>80GB NVMe SSD</li><li>7x Cloud Backup</li><li>7x Additional Port</li><li>7x Database</li></ul></div>
+<!-- Crown Plan -->
+<div class="plan-card"><div class="plan-icon">👑</div><h3 class="plan-title">Crown Plan</h3><div class="plan-price-btn">₹1080 / month<br>$12.25</div><ul class="plan-features"><li>48GB DDR5 RAM</li><li>8vCore CPU</li><li>90GB NVMe SSD</li><li>10x Cloud Backup</li><li>10x Additional Port</li><li>10x Database</li></ul></div>
+<!-- Infinity Plan -->
+<div class="plan-card"><div class="plan-icon">♾️</div><h3 class="plan-title">Infinity Plan</h3><div class="plan-price-btn">₹1800 / month<br>$20.42</div><ul class="plan-features"><li>♾️ GB DDR5 RAM</li><li>♾️ vCore CPU (Ryzen 9)</li><li>♾️ NVMe SSD</li><li>15x Cloud Backup</li><li>15x Additional Port</li><li>15x Database</li></ul></div>
 </div>
 </main>
 
