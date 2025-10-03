@@ -119,9 +119,6 @@ footer a:hover{text-decoration:underline;}
 <nav id="sideMenu">
   <ul>
     <li id="menuAbout">About</li>
-    <li id="menuFeatures">Features</li>
-    <li id="menuPricing">Pricing</li>
-    <li id="menuContact">Contact</li>
   </ul>
 </nav>
 
@@ -162,6 +159,12 @@ const hamburger = document.getElementById('hamburgerMenu');
 const sideMenu = document.getElementById('sideMenu');
 hamburger.addEventListener('click',()=>{ 
   sideMenu.style.left = sideMenu.style.left === '0px' ? '-280px' : '0px';
+});
+
+// About link click
+document.getElementById('menuAbout').addEventListener('click', ()=>{
+  sideMenu.style.left = '-280px'; // close menu
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll to top
 });
 
 // Discord & Contact
