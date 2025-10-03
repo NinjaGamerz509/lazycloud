@@ -1,200 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LAZY CLOUD - Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-<style>
-/* Disable text selection */
-* { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
-::selection { background: transparent; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LAZY CLOUD - Player</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:#04101a;
+      --card:#0f1724;
+      --accent:#1f77ff;
+      --accent-2:#7ab2ff;
+      --muted:#9fb9ff;
+      --text:#e6eef8;
+    }
+    body {
+      margin:0; padding:0; font-family:'Poppins', sans-serif;
+      background:var(--bg); color:var(--text);
+    }
 
-:root {
-  --bg:#04101a;
-  --card:#0f1724;
-  --accent:#1f77ff;
-  --accent-2:#7ab2ff;
-  --muted:#9fb9ff;
-  --text:#e6eef8;
-}
+    /* ===== Hamburger Menu ===== */
+    .menu-btn {
+      position:fixed; top:20px; left:20px; z-index:999;
+      display:flex; flex-direction:column; justify-content:space-between;
+      width:30px; height:22px; cursor:pointer;
+    }
+    .menu-btn div {
+      height:4px; background:#1f77ff; border-radius:2px;
+      transition:all 0.3s ease;
+    }
+    .menu-btn.active div:nth-child(1){ transform:rotate(45deg) translate(5px,5px);}
+    .menu-btn.active div:nth-child(2){ opacity:0;}
+    .menu-btn.active div:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px);}
+    .nav-menu {
+      position:fixed; top:0; left:-100%; width:240px; height:100vh;
+      background:var(--card); padding:80px 20px; display:flex; flex-direction:column;
+      transition:left 0.35s ease; z-index:998;
+    }
+    .nav-menu a {
+      color:#fff; text-decoration:none; margin:12px 0; font-size:18px; font-weight:600;
+    }
+    .nav-menu a:hover{ color:var(--accent); }
 
-body {
-  margin:0; padding:0; font-family: 'Poppins', sans-serif;
-  background:var(--bg); color:var(--text);
-  scroll-behavior: smooth;
-  min-height:100vh;
-  display:flex; flex-direction:column;
-}
-main{flex:1;}
+    /* ===== Hero ===== */
+    .hero {
+      display:flex; align-items:center; justify-content:center;
+      min-height:70vh; padding:40px 20px;
+    }
+    .hero-card {
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--card);
+      padding:70px 48px; border-radius:22px; text-align:center;
+      box-shadow:0 8px 40px rgba(2,6,23,0.6), 0 0 28px rgba(27,102,255,0.04);
+      width:92%; max-width:980px;
+      transition:all .25s ease;
+    }
+    .hero-card:hover { transform:translateY(-6px); filter: drop-shadow(0 0 12px #1f77ff);}
+    h1 {
+      font-size:48px; margin:0; font-weight:900; letter-spacing:1px;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+    h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600;}
+    .lead{ font-size:18px; color:#d7e6f7; line-height:1.7;}
 
-/* Discord button */
-.discord-btn{
-  position:fixed; top:20px; right:20px;
-  background:#5865F2; color:#fff;
-  border:none; border-radius:10px;
-  padding:12px 20px; font-weight:700;
-  cursor:pointer; z-index:999; overflow:hidden;
-  box-shadow:0 6px 20px rgba(24, 90, 217, 0.18);
-  transition:transform .15s ease, box-shadow .2s ease;
-}
-.discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24,90,217,0.26);}
-.discord-btn:active{ transform:translateY(0) scale(.99);}
+    /* ===== Feature Cards ===== */
+    .features {
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+      gap:22px; padding:40px 20px; max-width:1200px; margin:0 auto;
+    }
+    .feature-card {
+      background:var(--card); padding:28px; border-radius:18px; text-align:center;
+      transition:.25s ease; border:1px solid rgba(255,255,255,0.06);
+    }
+    .feature-card:hover { transform:translateY(-6px); box-shadow:0 0 18px rgba(31,119,255,0.4);}
+    .feature-icon { font-size:34px; margin-bottom:12px;}
+    .feature-card h3 { margin:8px 0; font-size:20px; color:var(--accent);}
+    .feature-card p { font-size:15px; color:var(--muted); }
 
-/* Hamburger menu */
-#hamburgerMenu {
-  position: fixed; top:20px; left:20px; z-index:1000;
-  display:flex; flex-direction:column; justify-content:center; height:30px; gap:6px; cursor:pointer;
-}
-#hamburgerMenu div {
-  width:32px; height:4px; background:white; border-radius:3px;
-  transition:0.3s; box-shadow:0 2px 6px rgba(0,0,0,0.3);
-}
-
-/* Side menu */
-#sideMenu{
-  position:fixed; top:0; left:-280px; width:280px; height:100vh;
-  background: rgba(15,23,36,0.95); backdrop-filter: blur(12px);
-  padding-top:100px; z-index:998; transition:0.3s;
-  border-right: 2px solid rgba(31,119,255,0.2); border-radius:0 12px 12px 0;
-}
-#sideMenu ul{ list-style:none; padding:0; margin:0; color:white; font-size:18px; font-weight:600; font-family:'Poppins',sans-serif; }
-#sideMenu li{ padding:18px 28px; cursor:pointer; border-radius:10px; margin-bottom:8px; transition: all 0.3s ease; }
-#sideMenu li:hover{ background: linear-gradient(90deg,#1f77ff,#7ab2ff); color:white; transform: translateX(8px); box-shadow:0 4px 15px rgba(31,119,255,0.3); }
-
-/* Hero card */
-.hero{ display:flex; align-items:center; justify-content:center; min-height:80vh; padding:40px 20px 20px 20px; }
-.card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--card);
-  padding:70px 48px; border-radius:22px;
-  text-align:center; box-shadow:0 8px 40px rgba(2,6,23,0.6), 0 0 28px rgba(27,102,255,0.04);
-  width:92%; max-width:980px; margin:auto; position:relative; overflow:hidden;
-  cursor:pointer; transition:box-shadow .25s ease, transform .18s ease, filter .25s ease;
-}
-.card:hover{ box-shadow:0 16px 60px rgba(2,6,23,0.7), 0 0 60px rgba(27,102,255,0.09); transform:translateY(-6px); filter:drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
-@keyframes glowPulse{ 0%{ filter:drop-shadow(0 0 12px #1f77ff) brightness(1); } 100%{ filter:drop-shadow(0 0 28px #1f77ff) brightness(1.1); } }
-
-h1{ font-size:56px; margin:0; font-weight:900; letter-spacing:1px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
-h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
-.lead{ font-size:18px; line-height:1.85; max-width:860px; margin:0 auto; color:#d7e6f7; opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
-
-/* Scroll Section */
-.section{ text-align:center; padding:60px 14px 120px 14px; }
-.section h2{ font-size:32px; margin-bottom:14px; color:var(--accent-2); opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
-.section p{ font-size:16px; max-width:820px; margin:0 auto 30px auto; color:#cfe3ff; line-height:1.6; opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
-
-/* Feature cards */
-.features-wrapper{ display:flex; flex-direction:column; gap:26px; align-items:center; justify-content:center; padding:12px; }
-.feature-card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)), var(--card);
-  padding:36px 26px; border-radius:16px; width:92%; max-width:640px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.5); text-align:center; position:relative; overflow:hidden;
-  transition:transform .18s ease, box-shadow .22s ease, filter .25s ease, opacity .8s ease;
-  cursor:pointer; opacity:0; transform:translateY(30px);
-}
-.feature-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(15,40,100,0.18); filter: drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
-.icon-btn{ font-size:40px; color:var(--accent); background:rgba(8,16,26,0.35); border-radius:50%; width:74px; height:74px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px auto; pointer-events:none; box-shadow:0 6px 22px rgba(27,102,255,0.06); }
-.feature-title{ font-size:18px; font-weight:800; margin-bottom:10px; color:#fff; }
-.feature-desc{ font-size:15px; color:#cfe3ff; line-height:1.6; max-width:520px; margin:0 auto; }
-
-/* Shine effect */
-.shine-effect{ position:absolute; top:0; left:-100%; width:40%; height:100%; background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)); transform:skewX(-25deg); opacity:0; pointer-events:none; border-radius:50%; }
-.animate-shine .shine-effect{ animation:shine-real 0.8s ease forwards; }
-@keyframes shine-real{ 0%{ left:-100%; opacity:0.4; } 50%{ left:120%; opacity:0.15; } 100%{ left:120%; opacity:0; } }
-
-/* Footer */
-footer{ background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding:18px 12px; text-align:center; font-size:14px; color:var(--muted); border-top:1px solid rgba(19,34,53,0.6); }
-footer a{color:#7ab2ff;text-decoration:none;margin:0 10px;cursor:pointer;}
-footer a:hover{text-decoration:underline;}
-
-/* Responsive */
-@media (max-width:820px){ h1{font-size:46px} .card{padding:50px 30px} .icon-btn{width:64px;height:64px;font-size:36px} }
-@media (max-width:520px){ h1{font-size:34px} .card{padding:36px 18px} .feature-card{padding:22px} }
-</style>
+    /* ===== Footer ===== */
+    footer {
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+      padding:18px 12px; text-align:center; font-size:14px; color:var(--muted);
+      border-top:1px solid rgba(19,34,53,0.6);
+    }
+    footer a{color:#7ab2ff;text-decoration:none;margin:0 10px;cursor:pointer;}
+    footer a:hover{text-decoration:underline;}
+  </style>
 </head>
 <body>
 
-<!-- Hamburger -->
-<div id="hamburgerMenu"><div></div><div></div><div></div></div>
-<nav id="sideMenu">
-  <ul>
-    <li id="menuAbout">About</li>
-<li id="menuPlans">MC Plans</li>
-  </ul>
+<!-- ===== Hamburger Button ===== -->
+<div class="menu-btn" id="menuBtn">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+<nav class="nav-menu" id="navMenu">
+  <a href="player.html">About</a>
+  <a href="plans.html">MC Plans</a>
+  <a href="vpsplans.html">VPS Plans</a>
 </nav>
 
-<button class="discord-btn" id="discordBtn">Join Discord</button>
-
-<main>
-  <div class="hero">
-    <div class="card btn-shine" id="heroCard"><div class="shine-effect"></div>
-      <h1>LAZY CLOUD</h1>
-      <h2>Premium & Free Hosting</h2>
-      <p class="lead">Experience premium Minecraft hosting with zero hassle.<br>Fast setup, reliable performance, and 24/7 support for the Indian gaming community.</p>
-    </div>
+<!-- ===== Hero Section ===== -->
+<section class="hero">
+  <div class="hero-card">
+    <h1>Lazy Cloud</h1>
+    <h2>About Our Hosting</h2>
+    <p class="lead">Experience premium Minecraft & VPS hosting with low latency servers in India.  
+    Designed for gamers, creators, and communities who want reliability with speed.</p>
   </div>
+</section>
 
-  <div class="section">
-    <h2>Why Choose Lazy Cloud</h2>
-    <p>No more pulling all-nighters configuring servers — we handle the technical complexity so you can focus on what matters: playing with friends.</p>
-    <div class="features-wrapper">
-      <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">⚡</div><div class="feature-title">1-Click Mod & Plugin Install</div><div class="feature-desc">Install your favorite mods and plugins with just one click.</div></div>
-      <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🛡️</div><div class="feature-title">DDoS Protection</div><div class="feature-desc">Advanced protection to keep your server safe and online.</div></div>
-      <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🕑</div><div class="feature-title">24/7 Uptime Guarantee</div><div class="feature-desc">Your server stays online around the clock.</div></div>
-      <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🛠️</div><div class="feature-title">Easy Control Panel</div><div class="feature-desc">Manage your server with an intuitive control panel.</div></div>
-    </div>
+<!-- ===== Feature Cards ===== -->
+<section class="features">
+  <div class="feature-card">
+    <div class="feature-icon">⚡</div>
+    <h3>High Performance</h3>
+    <p>Optimized Intel® CPUs and NVMe SSDs for lightning-fast speeds.</p>
   </div>
-</main>
+  <div class="feature-card">
+    <div class="feature-icon">🛡️</div>
+    <h3>Security</h3>
+    <p>DDoS protection and constant monitoring to keep your servers safe.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">⏱️</div>
+    <h3>99.9% Uptime</h3>
+    <p>Reliable infrastructure ensuring your projects are always online.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🛠️</div>
+    <h3>Easy Control</h3>
+    <p>User-friendly panel for simple management of your servers.</p>
+  </div>
+</section>
 
+<!-- ===== Footer ===== -->
 <footer>
-© 2025 Lazy Cloud. All Rights Reserved.
-<span>|</span>
-<a href="privacy.html">Privacy Policy</a>
-<a href="terms.html">Terms</a>
-<a id="contactBtn">Contact Us</a>
+  © 2025 Lazy Cloud. All Rights Reserved.
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="terms.html">Terms</a>
 </footer>
 
 <script>
-// Hamburger toggle
-const hamburger = document.getElementById('hamburgerMenu');
-const sideMenu = document.getElementById('sideMenu');
-hamburger.addEventListener('click',()=>{ 
-  sideMenu.style.left = sideMenu.style.left === '0px' ? '-280px' : '0px';
-});
-
-// About link click
-document.getElementById('menuAbout').addEventListener('click', ()=>{
-  sideMenu.style.left = '-280px'; // close menu
-  window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll to top
-});
-
-// MC Plans link click
-document.getElementById('menuPlans').addEventListener('click', ()=>{
-  sideMenu.style.left = '-280px'; // close menu
-  window.location.href = 'plans.html'; // redirect to MC Plans page
-});
-
-// Discord & Contact
-document.getElementById('discordBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
-document.getElementById('contactBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
-
-// Feature cards fade-in on scroll
-const fsection = document.querySelectorAll('.section h2, .section p, .feature-card, .lead');
-window.addEventListener('scroll', ()=>{
-  fsection.forEach(el=>{
-    const top = el.getBoundingClientRect().top;
-    const winH = window.innerHeight;
-    if(top<winH-50){ el.style.opacity='1'; el.style.transform='translateY(0)'; }
+  // Hamburger toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navMenu = document.getElementById('navMenu');
+  menuBtn.addEventListener('click', ()=>{
+    menuBtn.classList.toggle('active');
+    navMenu.style.left = navMenu.style.left === '0px' ? '-100%' : '0';
   });
-});
-
-// Shine effect
-document.querySelectorAll('.btn-shine').forEach(btn=>{
-  btn.addEventListener('mouseenter', ()=>{
-    btn.classList.add('animate-shine');
-    setTimeout(()=>{ btn.classList.remove('animate-shine'); },800);
-  });
-});
 </script>
+
 </body>
 </html>
