@@ -16,20 +16,32 @@
       justify-content:center;
       min-height:100vh;
     }
-    .container{
-      position:relative;
-      width:90%;
-      max-width:800px;
+    .discord-btn{
+      position:fixed;
+      top:20px;
+      right:20px;
+      background:#5865F2;
+      color:#fff;
+      border:none;
+      border-radius:8px;
+      padding:12px 22px;
+      font-weight:bold;
+      cursor:pointer;
+      transition:0.3s;
+      z-index:999;
     }
+    .discord-btn:hover{ background:#4752c4; }
     .card{
       background:#0f1724;
-      padding:40px 30px;
-      border-radius:16px;
+      padding:60px 40px;
+      border-radius:20px;
       text-align:center;
-      box-shadow:0 0 20px rgba(0,0,0,0.6);
+      box-shadow:0 0 25px rgba(0,0,0,0.6);
+      width:90%;
+      max-width:900px;
     }
     h1{
-      font-size:40px;
+      font-size:52px;
       margin:0;
       font-weight:900;
       letter-spacing:2px;
@@ -38,44 +50,31 @@
       -webkit-text-fill-color:transparent;
     }
     h2{
-      font-size:20px;
-      margin:8px 0 20px 0;
+      font-size:24px;
+      margin:12px 0 24px 0;
       color:#9fb9ff;
     }
     p{
-      font-size:15px;
-      line-height:1.6;
-      max-width:600px;
+      font-size:18px;
+      line-height:1.8;
+      max-width:700px;
       margin:0 auto;
     }
-    .discord-btn{
-      position:absolute;
-      top:15px;
-      right:15px;
-      background:#5865F2;
-      color:#fff;
-      border:none;
-      border-radius:8px;
-      padding:10px 18px;
-      font-weight:bold;
-      cursor:pointer;
-      transition:0.3s;
-    }
-    .discord-btn:hover{ background:#4752c4; }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button class="discord-btn" onclick="window.open('https://discord.gg/5hx3wJCnd9','_blank')">Join Discord</button>
-    <div class="card">
-      <h1>LAZY CLOUD</h1>
-      <h2>Premium & Free Hosting</h2>
-      <p>
-        Experience premium Minecraft hosting with zero hassle. <br>
-        Fast setup, reliable performance, and 24/7 support <br>
-        for the Indian gaming community.
-      </p>
-    </div>
+  <!-- Top right Discord button -->
+  <button class="discord-btn" onclick="window.open('https://discord.gg/5hx3wJCnd9','_blank')">Join Discord</button>
+
+  <!-- Main card -->
+  <div class="card">
+    <h1>LAZY CLOUD</h1>
+    <h2>Premium & Free Hosting</h2>
+    <p>
+      Experience premium Minecraft hosting with zero hassle.<br>
+      Fast setup, reliable performance, and 24/7 support<br>
+      for the Indian gaming community.
+    </p>
   </div>
 </body>
 </html>
