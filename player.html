@@ -11,11 +11,8 @@
       padding:0;
       background:#04101a;
       color:#e6eef8;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
     }
+    /* Discord button */
     .discord-btn{
       position:fixed;
       top:20px;
@@ -31,6 +28,13 @@
       z-index:999;
     }
     .discord-btn:hover{ background:#4752c4; }
+    /* Hero card */
+    .hero{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:100vh;
+    }
     .card{
       background:#0f1724;
       padding:60px 40px;
@@ -60,21 +64,90 @@
       max-width:700px;
       margin:0 auto;
     }
+    /* Scroll Section */
+    .section{
+      text-align:center;
+      padding:80px 20px;
+    }
+    .section h2{
+      font-size:30px;
+      margin-bottom:20px;
+      color:#7ab2ff;
+    }
+    .section p{
+      font-size:16px;
+      max-width:700px;
+      margin:0 auto 40px auto;
+      color:#cdd7e6;
+      line-height:1.6;
+    }
+    .feature-card{
+      background:#0f1724;
+      padding:50px 30px;
+      border-radius:20px;
+      width:90%;
+      max-width:600px;
+      margin:0 auto;
+      box-shadow:0 0 20px rgba(0,0,0,0.5);
+    }
+    .power-btn{
+      font-size:40px;
+      color:#1f77ff;
+      background:#07101a;
+      border-radius:50%;
+      width:70px;
+      height:70px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 20px auto;
+      pointer-events:none; /* disable click */
+      user-select:none;
+    }
+    .feature-title{
+      font-size:18px;
+      font-weight:bold;
+      margin-bottom:12px;
+      color:#fff;
+    }
+    .feature-desc{
+      font-size:15px;
+      color:#cdd7e6;
+      line-height:1.6;
+    }
   </style>
 </head>
 <body>
   <!-- Top right Discord button -->
   <button class="discord-btn" onclick="window.open('https://discord.gg/5hx3wJCnd9','_blank')">Join Discord</button>
 
-  <!-- Main card -->
-  <div class="card">
-    <h1>LAZY CLOUD</h1>
-    <h2>Premium & Free Hosting</h2>
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="card">
+      <h1>LAZY CLOUD</h1>
+      <h2>Premium & Free Hosting</h2>
+      <p>
+        Experience premium Minecraft hosting with zero hassle.<br>
+        Fast setup, reliable performance, and 24/7 support<br>
+        for the Indian gaming community.
+      </p>
+    </div>
+  </div>
+
+  <!-- Why Choose Section -->
+  <div class="section">
+    <h2>Why Choose Lazy Cloud</h2>
     <p>
-      Experience premium Minecraft hosting with zero hassle.<br>
-      Fast setup, reliable performance, and 24/7 support<br>
-      for the Indian gaming community.
+      No more pulling all-nighters configuring servers — we handle the technical complexity 
+      so you can focus on what matters: playing with friends.
     </p>
+    <div class="feature-card">
+      <div class="power-btn">⚡</div>
+      <div class="feature-title">1-Click Mod & Plugin Install</div>
+      <div class="feature-desc">
+        Install your favorite mods and plugins with just one click.
+      </div>
+    </div>
   </div>
 </body>
 </html>
