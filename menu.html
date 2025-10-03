@@ -1,0 +1,39 @@
+<div id="hamburgerMenu"><div></div><div></div><div></div></div>
+
+<nav id="sideMenu">
+  <ul>
+    <li id="menuAbout">About</li>
+    <li id="menuMCPlans">MC Plans</li>
+    <li id="menuVPSPlans">VPS Plans</li>
+  </ul>
+</nav>
+
+<button class="discord-btn" id="discordBtn">Join Discord</button>
+
+<script>
+// Hamburger toggle
+const hamburger = document.getElementById('hamburgerMenu');
+const sideMenu = document.getElementById('sideMenu');
+hamburger.addEventListener('click',()=>{ 
+  sideMenu.style.left = sideMenu.style.left === '0px' ? '-280px' : '0px';
+});
+
+// Menu link clicks
+document.getElementById('menuAbout').addEventListener('click', ()=>{
+  sideMenu.style.left = '-280px';
+  window.location.href = 'player.html';
+});
+document.getElementById('menuMCPlans').addEventListener('click', ()=>{
+  sideMenu.style.left = '-280px';
+  window.location.href = 'plans.html';
+});
+document.getElementById('menuVPSPlans').addEventListener('click', ()=>{
+  sideMenu.style.left = '-280px';
+  window.location.href = 'vps.html';
+});
+
+// Discord button
+document.getElementById('discordBtn').addEventListener('click', ()=>{
+  window.open('https://discord.gg/5hx3wJCnd9','_blank');
+});
+</script>
