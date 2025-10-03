@@ -28,6 +28,7 @@
       z-index:999;
     }
     .discord-btn:hover{ background:#4752c4; }
+
     /* Hero card */
     .hero{
       display:flex;
@@ -43,6 +44,7 @@
       box-shadow:0 0 25px rgba(0,0,0,0.6);
       width:90%;
       max-width:900px;
+      margin:auto;
     }
     h1{
       font-size:52px;
@@ -64,10 +66,11 @@
       max-width:700px;
       margin:0 auto;
     }
+
     /* Scroll Section */
     .section{
       text-align:center;
-      padding:80px 20px;
+      padding:80px 20px 120px 20px;
     }
     .section h2{
       font-size:30px;
@@ -81,16 +84,26 @@
       color:#cdd7e6;
       line-height:1.6;
     }
+
+    /* Feature cards container */
+    .features-wrapper{
+      display:flex;
+      flex-direction:column;
+      gap:28px;
+      align-items:center;
+      justify-content:center;
+    }
+
     .feature-card{
       background:#0f1724;
-      padding:50px 30px;
+      padding:40px 30px;
       border-radius:20px;
       width:90%;
       max-width:600px;
-      margin:0 auto;
       box-shadow:0 0 20px rgba(0,0,0,0.5);
+      text-align:center;
     }
-    .power-btn{
+    .power-btn, .shield-btn{
       font-size:40px;
       color:#1f77ff;
       background:#07101a;
@@ -100,13 +113,13 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      margin:0 auto 20px auto;
-      pointer-events:none; /* disable click */
+      margin:0 auto 18px auto;
+      pointer-events:none;
       user-select:none;
     }
     .feature-title{
-      font-size:18px;
-      font-weight:bold;
+      font-size:18px; /* required size */
+      font-weight:700;
       margin-bottom:12px;
       color:#fff;
     }
@@ -114,6 +127,14 @@
       font-size:15px;
       color:#cdd7e6;
       line-height:1.6;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width:520px){
+      h1{font-size:40px}
+      .card{padding:40px 20px}
+      .feature-card{padding:28px 18px}
+      .power-btn, .shield-btn{width:64px;height:64px;font-size:34px}
     }
   </style>
 </head>
@@ -141,11 +162,24 @@
       No more pulling all-nighters configuring servers — we handle the technical complexity 
       so you can focus on what matters: playing with friends.
     </p>
-    <div class="feature-card">
-      <div class="power-btn">⚡</div>
-      <div class="feature-title">1-Click Mod & Plugin Install</div>
-      <div class="feature-desc">
-        Install your favorite mods and plugins with just one click.
+
+    <div class="features-wrapper">
+      <!-- Feature Card 1: Power / 1-Click -->
+      <div class="feature-card" aria-hidden="false">
+        <div class="power-btn">⚡</div>
+        <div class="feature-title">1-Click Mod & Plugin Install</div>
+        <div class="feature-desc">
+          Install your favorite mods and plugins with just one click.
+        </div>
+      </div>
+
+      <!-- Feature Card 2: Shield / DDoS Protection -->
+      <div class="feature-card" aria-hidden="false">
+        <div class="shield-btn">🛡️</div>
+        <div class="feature-title">DDoS Protection</div>
+        <div class="feature-desc">
+          Advanced protection to keep your server safe and online.
+        </div>
       </div>
     </div>
   </div>
