@@ -1,15 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LAZY CLOUD - Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-/* Disable text selection globally */
+/* Disable text selection */
 * { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 ::selection { background: transparent; }
 
-:root{
+:root {
   --bg:#04101a;
   --card:#0f1724;
   --accent:#1f77ff;
@@ -18,349 +19,158 @@
   --text:#e6eef8;
 }
 
-body{
-  font-family: Arial, sans-serif;
-  margin:0;
-  padding:0;
-  background:var(--bg);
-  color:var(--text);
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
+body {
+  margin:0; padding:0; font-family: 'Poppins', sans-serif;
+  background:var(--bg); color:var(--text);
   scroll-behavior: smooth;
 }
 main{flex:1}
 
-/* Discord button fixed top-right */
+/* Discord button */
 .discord-btn{
-  position:fixed;
-  top:20px;
-  right:20px;
-  background:#5865F2;
-  color:#fff;
-  border:none;
-  border-radius:10px;
-  padding:12px 20px;
-  font-weight:700;
-  cursor:pointer;
-  transition:transform .15s ease, box-shadow .2s ease;
-  z-index:999;
-  overflow:hidden;
+  position:fixed; top:20px; right:20px;
+  background:#5865F2; color:#fff;
+  border:none; border-radius:10px;
+  padding:12px 20px; font-weight:700;
+  cursor:pointer; z-index:999; overflow:hidden;
   box-shadow:0 6px 20px rgba(24, 90, 217, 0.18);
+  transition:transform .15s ease, box-shadow .2s ease;
 }
-.discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24, 90, 217, 0.26) }
-.discord-btn:active{ transform:translateY(0) scale(.99) }
+.discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24,90,217,0.26);}
+.discord-btn:active{ transform:translateY(0) scale(.99);}
 
-/* Hamburger menu */
-#hamburgerMenu{ position:fixed; top:20px; left:20px; z-index:1000; cursor:pointer; }
-#hamburgerMenu div{ width:30px; height:3px; background:white; margin:6px 0; transition:0.3s; }
+/* Hamburger */
+#hamburgerMenu{ position:fixed; top:20px; left:20px; z-index:1000; cursor:pointer; display:flex; flex-direction:column; justify-content:center; height:30px; }
+#hamburgerMenu div{ width:30px; height:3px; background:white; margin:5px 0; border-radius:2px; transition:0.3s; }
 
 /* Side menu */
 #sideMenu{
   position:fixed; top:0; left:-260px; width:260px; height:100vh;
-  background:rgba(15,23,36,0.95); backdrop-filter:blur(10px);
-  padding-top:80px; z-index:998; transition:0.3s;
+  background:rgba(15,23,36,0.95); backdrop-filter:blur(12px);
+  padding-top:100px; z-index:998; transition:0.3s;
+  border-right:1px solid rgba(31,119,255,0.2);
 }
 #sideMenu ul{ list-style:none; padding:0; margin:0; color:white; font-size:18px; }
-#sideMenu li{ padding:16px 24px; cursor:pointer; }
-#sideMenu li:hover{ background:rgba(31,119,255,0.2); }
+#sideMenu li{ padding:18px 28px; cursor:pointer; font-weight:600; transition: all 0.25s ease; border-radius:8px;}
+#sideMenu li:hover{ background:linear-gradient(90deg,#1f77ff,#7ab2ff); color:white; transform:translateX(6px); }
 
 /* Hero card */
-.hero{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:80vh;
-  padding:40px 20px 20px 20px;
-}
+.hero{ display:flex; align-items:center; justify-content:center; min-height:80vh; padding:40px 20px 20px 20px; }
 .card{
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--card);
-  padding:70px 48px;
-  border-radius:22px;
-  text-align:center;
-  box-shadow:0 8px 40px rgba(2,6,23,0.6), 0 0 28px rgba(27,102,255,0.04);
-  width:92%;
-  max-width:980px;
-  margin:auto;
-  position:relative;
-  overflow:hidden;
-  cursor:pointer;
-  transition:box-shadow .25s ease, transform .18s ease, filter .25s ease;
+  padding:70px 48px; border-radius:22px;
+  text-align:center; box-shadow:0 8px 40px rgba(2,6,23,0.6), 0 0 28px rgba(27,102,255,0.04);
+  width:92%; max-width:980px; margin:auto; position:relative; overflow:hidden;
+  cursor:pointer; transition:box-shadow .25s ease, transform .18s ease, filter .25s ease;
 }
-.card:hover{
-  box-shadow:0 16px 60px rgba(2,6,23,0.7), 0 0 60px rgba(27,102,255,0.09);
-  transform:translateY(-6px);
-  filter:drop-shadow(0 0 12px #1f77ff);
-  animation:glowPulse 1.6s infinite alternate;
-}
-@keyframes glowPulse{
-  0%{ filter:drop-shadow(0 0 12px #1f77ff) brightness(1); }
-  100%{ filter:drop-shadow(0 0 28px #1f77ff) brightness(1.1); }
-}
+.card:hover{ box-shadow:0 16px 60px rgba(2,6,23,0.7), 0 0 60px rgba(27,102,255,0.09); transform:translateY(-6px); filter:drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
+@keyframes glowPulse{ 0%{ filter:drop-shadow(0 0 12px #1f77ff) brightness(1); } 100%{ filter:drop-shadow(0 0 28px #1f77ff) brightness(1.1); } }
 
-h1{
-  font-size:56px;
-  margin:0;
-  font-weight:900;
-  letter-spacing:1px;
-  background:linear-gradient(90deg,var(--accent),var(--accent-2));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  line-height:1;
-}
-h2{
-  font-size:24px;
-  margin:12px 0 20px 0;
-  color:var(--muted);
-  font-weight:600;
-}
-.lead{
-  font-size:18px;
-  line-height:1.85;
-  max-width:860px;
-  margin:0 auto;
-  color:#d7e6f7;
-  opacity:0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+h1{ font-size:56px; margin:0; font-weight:900; letter-spacing:1px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
+h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
+.lead{ font-size:18px; line-height:1.85; max-width:860px; margin:0 auto; color:#d7e6f7; opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
 
 /* Scroll Section */
-.section{
-  text-align:center;
-  padding:60px 14px 120px 14px;
-}
+.section{ text-align:center; padding:60px 14px 120px 14px; }
 .section h2{ font-size:32px; margin-bottom:14px; color:var(--accent-2); opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
 .section p{ font-size:16px; max-width:820px; margin:0 auto 30px auto; color:#cfe3ff; line-height:1.6; opacity:0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
 
-/* Feature cards container */
-.features-wrapper{
-  display:flex;
-  flex-direction:column;
-  gap:26px;
-  align-items:center;
-  justify-content:center;
-  padding:12px;
-}
-
+/* Feature cards */
+.features-wrapper{ display:flex; flex-direction:column; gap:26px; align-items:center; justify-content:center; padding:12px; }
 .feature-card{
   background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)), var(--card);
-  padding:36px 26px;
-  border-radius:16px;
-  width:92%;
-  max-width:640px;
-  box-shadow:0 8px 30px rgba(0,0,0,0.5);
-  text-align:center;
-  position:relative;
-  overflow:hidden;
+  padding:36px 26px; border-radius:16px; width:92%; max-width:640px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5); text-align:center; position:relative; overflow:hidden;
   transition:transform .18s ease, box-shadow .22s ease, filter .25s ease, opacity .8s ease;
-  cursor:pointer;
-  opacity:0;
-  transform:translateY(30px);
+  cursor:pointer; opacity:0; transform:translateY(30px);
 }
-.feature-card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 18px 50px rgba(15,40,100,0.18);
-  filter: drop-shadow(0 0 12px #1f77ff);
-  animation:glowPulse 1.6s infinite alternate;
-}
-.icon-btn{
-  font-size:40px;
-  color:var(--accent);
-  background:rgba(8,16,26,0.35);
-  border-radius:50%;
-  width:74px;
-  height:74px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 18px auto;
-  pointer-events:none;
-  box-shadow:0 6px 22px rgba(27,102,255,0.06);
-}
-.feature-title{
-  font-size:18px;
-  font-weight:800;
-  margin-bottom:10px;
-  color:#fff;
-}
-.feature-desc{
-  font-size:15px;
-  color:#cfe3ff;
-  line-height:1.6;
-  max-width:520px;
-  margin:0 auto;
-}
+.feature-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(15,40,100,0.18); filter: drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
+.icon-btn{ font-size:40px; color:var(--accent); background:rgba(8,16,26,0.35); border-radius:50%; width:74px; height:74px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px auto; pointer-events:none; box-shadow:0 6px 22px rgba(27,102,255,0.06); }
+.feature-title{ font-size:18px; font-weight:800; margin-bottom:10px; color:#fff; }
+.feature-desc{ font-size:15px; color:#cfe3ff; line-height:1.6; max-width:520px; margin:0 auto; }
 
-/* Shine effect - left to right */
-.shine-effect{
-  position:absolute;
-  top:0;
-  left:-100%;
-  width:40%;
-  height:100%;
-  background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05));
-  transform:skewX(-25deg);
-  opacity:0;
-  pointer-events:none;
-  border-radius:50%;
-}
-.animate-shine .shine-effect{
-  animation:shine-real 0.8s ease forwards;
-}
-@keyframes shine-real{
-  0%{ left:-100%; opacity:0.4; }
-  50%{ left:120%; opacity:0.15; }
-  100%{ left:120%; opacity:0; }
-}
+/* Shine effect */
+.shine-effect{ position:absolute; top:0; left:-100%; width:40%; height:100%; background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)); transform:skewX(-25deg); opacity:0; pointer-events:none; border-radius:50%; }
+.animate-shine .shine-effect{ animation:shine-real 0.8s ease forwards; }
+@keyframes shine-real{ 0%{ left:-100%; opacity:0.4; } 50%{ left:120%; opacity:0.15; } 100%{ left:120%; opacity:0; } }
 
 /* Footer */
-footer{
-  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
-  padding:18px 12px;
-  text-align:center;
-  font-size:14px;
-  color:var(--muted);
-  border-top:1px solid rgba(19,34,53,0.6);
-}
+footer{ background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding:18px 12px; text-align:center; font-size:14px; color:var(--muted); border-top:1px solid rgba(19,34,53,0.6); }
 footer a{color:#7ab2ff;text-decoration:none;margin:0 10px;cursor:pointer;}
 footer a:hover{text-decoration:underline;}
 
-/* Responsive tweaks */
-@media (max-width:820px){
-  h1{font-size:46px}
-  .card{padding:50px 30px}
-  .icon-btn{width:64px;height:64px;font-size:36px}
-}
-@media (max-width:520px){
-  h1{font-size:34px}
-  .card{padding:36px 18px}
-  .feature-card{padding:22px}
-}
+/* Responsive */
+@media (max-width:820px){ h1{font-size:46px} .card{padding:50px 30px} .icon-btn{width:64px;height:64px;font-size:36px} }
+@media (max-width:520px){ h1{font-size:34px} .card{padding:36px 18px} .feature-card{padding:22px} }
+
 </style>
 </head>
 <body>
 
-<!-- Hamburger Menu -->
-<div id="hamburgerMenu">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
-<nav id="sideMenu">
-  <ul>
-    <li id="menuAbout">About</li>
-  </ul>
-</nav>
+<!-- Hamburger -->
+<div id="hamburgerMenu"><div></div><div></div><div></div></div>
+<nav id="sideMenu"><ul><li id="menuAbout">About</li></ul></nav>
 
-<!-- Discord Button -->
 <button class="discord-btn" id="discordBtn">Join Discord</button>
 
 <main>
 <div class="hero">
-  <div class="card btn-shine" id="heroCard">
-    <div class="shine-effect"></div>
+  <div class="card btn-shine" id="heroCard"><div class="shine-effect"></div>
     <h1>LAZY CLOUD</h1>
     <h2>Premium & Free Hosting</h2>
-    <p class="lead">
-      Experience premium Minecraft hosting with zero hassle.<br>
-      Fast setup, reliable performance, and 24/7 support<br>
-      for the Indian gaming community.
-    </p>
+    <p class="lead">Experience premium Minecraft hosting with zero hassle.<br>Fast setup, reliable performance, and 24/7 support<br>for the Indian gaming community.</p>
   </div>
 </div>
 
 <div class="section">
 <h2>Why Choose Lazy Cloud</h2>
-<p>
-  No more pulling all-nighters configuring servers — we handle the technical complexity 
-  so you can focus on what matters: playing with friends.
-</p>
-
+<p>No more pulling all-nighters configuring servers — we handle the technical complexity so you can focus on what matters: playing with friends.</p>
 <div class="features-wrapper">
   <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">⚡</div><div class="feature-title">1-Click Mod & Plugin Install</div><div class="feature-desc">Install your favorite mods and plugins with just one click.</div></div>
   <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🛡️</div><div class="feature-title">DDoS Protection</div><div class="feature-desc">Advanced protection to keep your server safe and online.</div></div>
   <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🕑</div><div class="feature-title">24/7 Uptime Guarantee</div><div class="feature-desc">Your server stays online around the clock.</div></div>
-  <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🛠️</div><div class="feature-title">Easy Control Panel</div><div class="feature-desc">Manage your server with an intuitive control panel and one-click actions.</div></div>
+  <div class="feature-card btn-shine"><div class="shine-effect"></div><div class="icon-btn">🛠️</div><div class="feature-title">Easy Control Panel</div><div class="feature-desc">Manage your server with an intuitive control panel.</div></div>
 </div>
 </div>
 </main>
 
 <footer>
 © 2025 Lazy Cloud. All Rights Reserved.
-<span style="margin:0 10px;">|</span>
+<span>|</span>
 <a href="privacy.html">Privacy Policy</a>
 <a href="terms.html">Terms</a>
 <a id="contactBtn">Contact Us</a>
 </footer>
 
 <script>
-// Discord button
-document.getElementById('discordBtn').addEventListener('click', ()=>{
-  window.open('https://discord.gg/5hx3wJCnd9','_blank');
-});
-
-// Footer Contact Us direct Discord
-document.getElementById('contactBtn').addEventListener('click', ()=>{
-  window.open('https://discord.gg/5hx3wJCnd9','_blank');
-});
-
-// Shine effect for all .btn-shine
-const btns = document.querySelectorAll('.btn-shine');
-btns.forEach(el=>{
-  el.addEventListener('click', ()=>{
-    const shine = el.querySelector('.shine-effect');
-    if(shine){
-      el.classList.add('animate-shine');
-      setTimeout(()=> el.classList.remove('animate-shine'), 800);
-    }
-  });
-  el.addEventListener('mousedown', e => e.preventDefault());
-});
-
-// Scroll fade-in animation
-const faders = document.querySelectorAll('.feature-card, .section h2, .section p, .lead');
-const appearOptions = { threshold:0.2, rootMargin:"0px 0px -50px 0px" };
-const appearOnScroll = new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.style.opacity='1';
-      entry.target.style.transform='translateY(0)';
-      appearOnScroll.unobserve(entry.target);
-    }
-  });
-}, appearOptions);
-faders.forEach(fader=>appearOnScroll.observe(fader));
-
-// Hamburger menu toggle
+// Hamburger toggle
 const hamburger = document.getElementById('hamburgerMenu');
 const sideMenu = document.getElementById('sideMenu');
-const menuAbout = document.getElementById('menuAbout');
-let menuOpen = false;
-
-hamburger.addEventListener('click', ()=>{
-  menuOpen = !menuOpen;
-  if(menuOpen){
-    sideMenu.style.left = '0';
-    hamburger.children[0].style.transform = 'rotate(45deg) translate(5px,5px)';
-    hamburger.children[1].style.opacity = '0';
-    hamburger.children[2].style.transform = 'rotate(-45deg) translate(6px,-6px)';
-  }else{
-    sideMenu.style.left = '-260px';
-    hamburger.children[0].style.transform = 'rotate(0deg) translate(0,0)';
-    hamburger.children[1].style.opacity = '1';
-    hamburger.children[2].style.transform = 'rotate(0deg) translate(0,0)';
-  }
+hamburger.addEventListener('click',()=>{ 
+  sideMenu.style.left = sideMenu.style.left === '0px' ? '-260px' : '0px';
 });
 
-// About click → scroll to top
-menuAbout.addEventListener('click', ()=>{
-  window.scrollTo({ top:0, behavior:'smooth' });
-  sideMenu.style.left='-260px';
-  menuOpen=false;
-  hamburger.children[0].style.transform='rotate(0deg) translate(0,0)';
-  hamburger.children[1].style.opacity='1';
-  hamburger.children[2].style.transform='rotate(0deg) translate(0,0)';
+// Discord & Contact
+document.getElementById('discordBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
+document.getElementById('contactBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
+
+// Feature cards fade-in on scroll
+const fcards = document.querySelectorAll('.feature-card');
+const fsection = document.querySelectorAll('.section h2, .section p, .feature-card');
+window.addEventListener('scroll', ()=>{
+  fsection.forEach(el=>{
+    const top = el.getBoundingClientRect().top;
+    const winH = window.innerHeight;
+    if(top<winH-50){ el.style.opacity='1'; el.style.transform='translateY(0)'; }
+  });
+});
+
+// Shine effect
+document.querySelectorAll('.btn-shine').forEach(btn=>{
+  btn.addEventListener('mouseenter', ()=>{
+    btn.classList.add('animate-shine');
+    setTimeout(()=>{ btn.classList.remove('animate-shine'); },800);
+  });
 });
 </script>
 </body>
