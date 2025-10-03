@@ -6,7 +6,6 @@
 <title>LAZY CLOUD - MC Plans</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-/* Disable text selection */
 * { user-select: none; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; }
 ::selection { background: transparent; }
 
@@ -19,169 +18,166 @@
   --text:#e6eef8;
 }
 
-body{
-  margin:0; padding:0; font-family: 'Poppins', sans-serif;
+body {
+  margin:0; padding:0; font-family:'Poppins',sans-serif;
   background:var(--bg); color:var(--text);
   scroll-behavior:smooth;
-  min-height:100vh; display:flex; flex-direction:column;
+  min-height:100vh;
+  display:flex; flex-direction:column;
 }
 main{flex:1;}
 
-/* Discord button */
-.discord-btn{
-  position:fixed; top:20px; right:20px;
-  background:#5865F2; color:#fff;
-  border:none; border-radius:10px;
-  padding:12px 20px; font-weight:700;
-  cursor:pointer; z-index:999; overflow:hidden;
-  box-shadow:0 6px 20px rgba(24, 90, 217, 0.18);
-  transition:transform .15s ease, box-shadow .2s ease;
-}
-.discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24,90,217,0.26);}
-.discord-btn:active{ transform:translateY(0) scale(.99);}
-
-/* Hamburger Menu */
-.menu-btn{
-  position:fixed; top:20px; left:20px; z-index:999;
-  display:flex; flex-direction:column; justify-content:space-between;
-  width:30px; height:22px; cursor:pointer;
-}
-.menu-btn div{
-  height:4px; background:#1f77ff; border-radius:2px;
-  transition: all 0.3s ease;
-}
-.menu-btn.active div:nth-child(1){ transform:rotate(45deg) translate(5px,5px);}
-.menu-btn.active div:nth-child(2){ opacity:0; }
-.menu-btn.active div:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px);}
-.nav-menu{
-  position:fixed; top:0; left:-100%; width:240px; height:100vh;
-  background:var(--card); padding:80px 20px; display:flex; flex-direction:column;
-  transition:left 0.35s ease; z-index:998;
-}
-.nav-menu a{
-  color:#fff; text-decoration:none; margin:12px 0; font-size:18px; font-weight:600;
-}
-.nav-menu a:hover{ color:var(--accent); }
-
-/* Hero section */
-.hero{
-  display:flex; align-items:center; justify-content:center;
-  min-height:50vh; padding:40px 20px 20px 20px;
-}
-.hero-card{
-  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)), var(--card);
-  padding:70px 48px; border-radius:22px; text-align:center;
-  box-shadow:0 8px 40px rgba(2,6,23,0.6), 0 0 28px rgba(27,102,255,0.04);
-  width:92%; max-width:980px; position:relative; overflow:hidden;
-}
-h1{ font-size:48px; margin:0; font-weight:900; letter-spacing:1px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
-h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
-
-/* Plans wrapper */
-.plans-wrapper{ display:flex; flex-wrap:wrap; gap:24px; justify-content:center; padding:40px 20px; }
+/* Cards */
 .plan-card{
   background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)), var(--card);
-  padding:32px 28px; border-radius:18px; width:92%; max-width:320px;
-  text-align:center; box-shadow:0 8px 28px rgba(0,0,0,0.5); position:relative; overflow:hidden;
-  transition: transform .18s ease, box-shadow .22s ease, filter .25s ease, opacity 0.8s ease, transform 0.8s ease;
-  cursor:pointer; opacity:0; transform: translateY(30px);
+  padding:36px 26px; border-radius:16px; width:92%; max-width:640px;
+  box-shadow:0 8px 30px rgba(0,0,0,0.5); text-align:center; position:relative; overflow:hidden;
+  margin:18px auto; cursor:pointer; transition:transform .18s ease, box-shadow .22s ease, filter .25s ease;
 }
-.plan-card.visible{ opacity:1; transform: translateY(0); }
 .plan-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(15,40,100,0.18); filter: drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
-.plan-icon{ font-size:48px; margin-bottom:12px; }
-.plan-title{ font-size:20px; font-weight:800; margin-bottom:10px; color:#fff; }
-.plan-price-btn{ display:inline-block; background:var(--accent); color:#fff; padding:10px 18px; border-radius:12px; font-weight:700; margin-bottom:16px; pointer-events:none; user-select:none; box-shadow:0 4px 15px rgba(31,119,255,0.3); }
-.plan-features{ list-style:none; padding:0; margin:0; color:#cfe3ff; font-size:15px; line-height:1.6; }
-.plan-features li{ margin-bottom:8px; }
+@keyframes glowPulse{0%{filter:drop-shadow(0 0 12px #1f77ff) brightness(1);}100%{filter:drop-shadow(0 0 28px #1f77ff) brightness(1.1);}}
+
+.plan-title{font-size:22px;font-weight:800;margin-bottom:12px;}
+.plan-specs{font-size:16px;line-height:1.6;color:#cfe3ff;margin-bottom:18px;}
+.plan-price{font-size:18px;font-weight:700;color:#fff;background:var(--accent);padding:8px 16px;border-radius:8px;display:inline-block;pointer-events:none;}
 
 /* Shine effect */
 .shine-effect{ position:absolute; top:0; left:-100%; width:40%; height:100%; background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)); transform:skewX(-25deg); opacity:0; pointer-events:none; border-radius:50%; }
-.btn-shine:hover .shine-effect{ animation:shine-real 0.8s ease forwards; }
-@keyframes shine-real{ 0%{ left:-100%; opacity:0.4; } 50%{ left:120%; opacity:0.15; } 100%{ left:120%; opacity:0; } }
-@keyframes glowPulse{ 0%{ filter:drop-shadow(0 0 12px #1f77ff) brightness(1); } 100%{ filter:drop-shadow(0 0 28px #1f77ff) brightness(1.1); } }
+.animate-shine .shine-effect{ animation:shine-real 0.8s ease forwards; }
 
 /* Footer */
 footer{ background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding:18px 12px; text-align:center; font-size:14px; color:var(--muted); border-top:1px solid rgba(19,34,53,0.6); }
 footer a{color:#7ab2ff;text-decoration:none;margin:0 10px;cursor:pointer;}
 footer a:hover{text-decoration:underline;}
-
-/* Responsive */
-@media (max-width:1024px){ .plans-wrapper{ flex-direction:column; align-items:center; } }
-@media (max-width:520px){ h1{font-size:34px;} .hero-card{padding:36px 18px;} .plan-card{padding:22px;}}
 </style>
 </head>
 <body>
 
-<!-- Hamburger Menu -->
-<div class="menu-btn" id="menuBtn">
-  <div></div>
-  <div></div>
-  <div></div>
-</div>
-<nav class="nav-menu" id="navMenu">
-  <a href="player.html">About</a>
-  <a href="#">MC Plans</a>
-</nav>
-
-<button class="discord-btn" id="discordBtn">Join Discord</button>
+<!-- Menu container -->
+<div id="menu-container"></div>
 
 <main>
-<div class="hero">
-  <div class="hero-card">
-    <h1>MC Hosting Plans</h1>
-    <h2>Choose the perfect plan for your server</h2>
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Dirt Plan</div>
+    <div class="plan-specs">
+      4GB DDR5 RAM<br>
+      1v Core<br>
+      10GB NVMe SSD<br>
+      5x Cloud Backup<br>
+      5x Additional Port<br>
+      5x Database
+    </div>
+    <div class="plan-price">₹120 / month</div>
   </div>
-</div>
 
-<div class="plans-wrapper">
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Coal Plan</div>
+    <div class="plan-specs">
+      8GB DDR5 RAM<br>
+      2v Core<br>
+      20GB NVMe SSD<br>
+      5x Cloud Backup<br>
+      5x Additional Port<br>
+      5x Database
+    </div>
+    <div class="plan-price">₹260 / month</div>
+  </div>
 
-  <!-- Dirt Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">🟫</div><h3 class="plan-title">Dirt Plan</h3><div class="plan-price-btn">₹120 / month</div><ul class="plan-features"><li>4GB DDR5 RAM</li><li>1vCore CPU</li><li>10GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Redstone Plan</div>
+    <div class="plan-specs">
+      10GB DDR5 RAM<br>
+      2.5v Core<br>
+      25GB NVMe SSD<br>
+      5x Cloud Backup<br>
+      5x Additional Port<br>
+      5x Database
+    </div>
+    <div class="plan-price">₹350 / month</div>
+  </div>
 
-  <!-- Coal Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">⚫</div><h3 class="plan-title">Coal Plan</h3><div class="plan-price-btn">₹260 / month</div><ul class="plan-features"><li>8GB DDR5 RAM</li><li>2vCore CPU</li><li>20GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Diamond Plan</div>
+    <div class="plan-specs">
+      16GB DDR5 RAM<br>
+      4v Core<br>
+      40GB NVMe SSD<br>
+      5x Cloud Backup<br>
+      5x Additional Port<br>
+      5x Database
+    </div>
+    <div class="plan-price">₹500 / month</div>
+  </div>
 
-  <!-- Redstone Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">🟥</div><h3 class="plan-title">Redstone Plan</h3><div class="plan-price-btn">₹350 / month</div><ul class="plan-features"><li>10GB DDR5 RAM</li><li>2.5vCore CPU</li><li>25GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Netherite Plan</div>
+    <div class="plan-specs">
+      32GB DDR5 RAM<br>
+      6v Core<br>
+      80GB NVMe SSD<br>
+      7x Cloud Backup<br>
+      7x Additional Port<br>
+      7x Database
+    </div>
+    <div class="plan-price">₹750 / month / $8.17</div>
+  </div>
 
-  <!-- Diamond Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">💎</div><h3 class="plan-title">Diamond Plan</h3><div class="plan-price-btn">₹500 / month</div><ul class="plan-features"><li>16GB DDR5 RAM</li><li>4vCore CPU</li><li>40GB NVMe SSD</li><li>5x Cloud Backup</li><li>5x Additional Port</li><li>5x Database</li></ul></div>
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Crown Plan</div>
+    <div class="plan-specs">
+      48GB RAM<br>
+      8v Core<br>
+      90GB SSD<br>
+      10x Cloud Backup<br>
+      10x Additional Port<br>
+      10x Database
+    </div>
+    <div class="plan-price">₹1080 / month / $12.25</div>
+  </div>
 
-  <!-- Netherite Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">🟪</div><h3 class="plan-title">Netherite Plan</h3><div class="plan-price-btn">₹750 / month<br>$8.17</div><ul class="plan-features"><li>32GB DDR5 RAM</li><li>6vCore CPU</li><li>80GB NVMe SSD</li><li>7x Cloud Backup</li><li>7x Additional Port</li><li>7x Database</li></ul></div>
-
-  <!-- Crown Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">👑</div><h3 class="plan-title">Crown Plan</h3><div class="plan-price-btn">₹1080 / month<br>$12.25</div><ul class="plan-features"><li>48GB DDR5 RAM</li><li>8vCore CPU</li><li>90GB NVMe SSD</li><li>10x Cloud Backup</li><li>10x Additional Port</li><li>10x Database</li></ul></div>
-
-  <!-- Infinity Plan -->
-  <div class="plan-card btn-shine"><div class="shine-effect"></div><div class="plan-icon">♾️</div><h3 class="plan-title">Infinity Plan</h3><div class="plan-price-btn">₹1800 / month<br>$20.42</div><ul class="plan-features"><li>♾️ GB DDR5 RAM</li><li>♾️ vCore CPU (Ryzen 9)</li><li>♾️ NVMe SSD</li><li>15x Cloud Backup</li><li>15x Additional Port</li><li>15x Database</li></ul></div>
-
-</div>
+  <div class="plan-card btn-shine"><div class="shine-effect"></div>
+    <div class="plan-title">Infinity Plan</div>
+    <div class="plan-specs">
+      ♾️ GB RAM<br>
+      ♾️ V Core<br>
+      ♾️ SSD<br>
+      15x Port<br>
+      15x Backup<br>
+      15x Database<br>
+      Ryzen 9
+    </div>
+    <div class="plan-price">₹1800 / month / $20.42</div>
+  </div>
 </main>
 
 <footer>
 © 2025 Lazy Cloud. All Rights Reserved.
+<span>|</span>
 <a href="privacy.html">Privacy Policy</a>
 <a href="terms.html">Terms</a>
+<a id="contactBtn">Contact Us</a>
 </footer>
 
 <script>
-// Hamburger toggle
-const menuBtn = document.getElementById('menuBtn');
-const navMenu = document.getElementById('navMenu');
-menuBtn.addEventListener('click', ()=>{ menuBtn.classList.toggle('active'); navMenu.style.left = navMenu.style.left === '0px' ? '-100%' : '0'; });
+// Fetch menu.html
+fetch('menu.html')
+  .then(response => response.text())
+  .then(data => { document.getElementById('menu-container').innerHTML = data; });
 
-// Discord button
-document.getElementById('discordBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
-
-// Fade-in on scroll
-const cards = document.querySelectorAll('.plan-card');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+// Shine effect
+document.querySelectorAll('.btn-shine').forEach(btn=>{
+  btn.addEventListener('mouseenter', ()=>{
+    btn.classList.add('animate-shine');
+    setTimeout(()=>{ btn.classList.remove('animate-shine'); },800);
   });
-},{ threshold:0.2 });
-cards.forEach(card=>observer.observe(card));
+});
+
+// Contact redirect
+document.addEventListener('click', e=>{
+  if(e.target.id==='contactBtn'){
+    window.open('https://discord.gg/5hx3wJCnd9','_blank');
+  }
+});
 </script>
 </body>
 </html>
