@@ -28,6 +28,40 @@ body {
 }
 main{flex:1;}
 
+/* Discord button */
+.discord-btn{
+  position:fixed; top:20px; right:20px;
+  background:#5865F2; color:#fff;
+  border:none; border-radius:10px;
+  padding:12px 20px; font-weight:700;
+  cursor:pointer; z-index:999; overflow:hidden;
+  box-shadow:0 6px 20px rgba(24, 90, 217, 0.18);
+  transition:transform .15s ease, box-shadow .2s ease;
+}
+.discord-btn:hover{ transform:translateY(-3px); box-shadow:0 10px 30px rgba(24,90,217,0.26);}
+.discord-btn:active{ transform:translateY(0) scale(.99);}
+
+/* Hamburger menu */
+#hamburgerMenu {
+  position: fixed; top:20px; left:20px; z-index:1000;
+  display:flex; flex-direction:column; justify-content:center; height:30px; gap:6px; cursor:pointer;
+}
+#hamburgerMenu div {
+  width:32px; height:4px; background:white; border-radius:3px;
+  transition:0.3s; box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+/* Side menu */
+#sideMenu{
+  position:fixed; top:0; left:-280px; width:280px; height:100vh;
+  background: rgba(15,23,36,0.95); backdrop-filter: blur(12px);
+  padding-top:100px; z-index:998; transition:0.3s;
+  border-right: 2px solid rgba(31,119,255,0.2); border-radius:0 12px 12px 0;
+}
+#sideMenu ul{ list-style:none; padding:0; margin:0; color:white; font-size:18px; font-weight:600; font-family:'Poppins',sans-serif; }
+#sideMenu li{ padding:18px 28px; cursor:pointer; border-radius:10px; margin-bottom:8px; transition: all 0.3s ease; }
+#sideMenu li:hover{ background: linear-gradient(90deg,#1f77ff,#7ab2ff); color:white; transform: translateX(8px); box-shadow:0 4px 15px rgba(31,119,255,0.3); }
+
 /* Hero card */
 .hero{ display:flex; align-items:center; justify-content:center; min-height:80vh; padding:40px 20px 20px 20px; }
 .card{
@@ -80,8 +114,16 @@ footer a:hover{text-decoration:underline;}
 </head>
 <body>
 
-<!-- Menu container -->
-<div id="menu-container"></div>
+<!-- Hamburger -->
+<div id="hamburgerMenu"><div></div><div></div><div></div></div>
+<nav id="sideMenu">
+  <ul>
+    <li id="menuAbout">About</li>
+<li id="menuPlans">MC Plans</li>
+  </ul>
+</nav>
+
+<button class="discord-btn" id="discordBtn">Join Discord</button>
 
 <main>
   <div class="hero">
@@ -113,10 +155,28 @@ footer a:hover{text-decoration:underline;}
 </footer>
 
 <script>
-// Fetch menu.html
-fetch('menu.html')
-  .then(response => response.text())
-  .then(data => { document.getElementById('menu-container').innerHTML = data; });
+// Hamburger toggle
+const hamburger = document.getElementById('hamburgerMenu');
+const sideMenu = document.getElementById('sideMenu');
+hamburger.addEventListener('click',()=>{ 
+  sideMenu.style.left = sideMenu.style.left === '0px' ? '-280px' : '0px';
+});
+
+// About link click
+document.getElementById('menuAbout').addEventListener('click', ()=>{
+  sideMenu.style.left = '-280px'; // close menu
+  window.scrollTo({ top: 0, behavior: 'smooth' }); // scroll to top
+});
+
+// MC Plans link click
+document.getElementById('menuPlans').addEventListener('click', ()=>{
+  sideMenu.style.left = '-280px'; // close menu
+  window.location.href = 'plans.html'; // redirect to MC Plans page
+});
+
+// Discord & Contact
+document.getElementById('discordBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
+document.getElementById('contactBtn').addEventListener('click', ()=>{ window.open('https://discord.gg/5hx3wJCnd9','_blank'); });
 
 // Feature cards fade-in on scroll
 const fsection = document.querySelectorAll('.section h2, .section p, .feature-card, .lead');
@@ -134,13 +194,6 @@ document.querySelectorAll('.btn-shine').forEach(btn=>{
     btn.classList.add('animate-shine');
     setTimeout(()=>{ btn.classList.remove('animate-shine'); },800);
   });
-});
-
-// Contact redirect
-document.addEventListener('click', e=>{
-  if(e.target.id==='contactBtn'){
-    window.open('https://discord.gg/5hx3wJCnd9','_blank');
-  }
 });
 </script>
 </body>
