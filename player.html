@@ -77,7 +77,7 @@ main{flex:1;}
 h1{ font-size:48px; margin:0; font-weight:900; letter-spacing:1px; background:linear-gradient(90deg,var(--accent),var(--accent-2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; line-height:1; }
 h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
 
-/* Card sections */
+/* Section cards */
 .section-card{
   background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01)), var(--card);
   padding:48px 28px; border-radius:22px; margin:32px auto; max-width:800px;
@@ -89,6 +89,7 @@ h2{ font-size:24px; margin:12px 0 20px 0; color:var(--muted); font-weight:600; }
 .section-card:hover{ transform:translateY(-6px); box-shadow:0 18px 50px rgba(15,40,100,0.18); filter: drop-shadow(0 0 12px #1f77ff); animation:glowPulse 1.6s infinite alternate; }
 .section-title{ font-size:32px; font-weight:900; margin-bottom:12px; }
 .section-subtitle{ font-size:18px; color:#cfe3ff; margin-bottom:16px; }
+.section-icon{ font-size:48px; margin-bottom:12px; }
 
 /* Shine effect */
 .shine-effect{ position:absolute; top:0; left:-100%; width:40%; height:100%; background:linear-gradient(120deg, rgba(255,255,255,0.4), rgba(255,255,255,0.05)); transform:skewX(-25deg); opacity:0; pointer-events:none; border-radius:50%; }
@@ -129,10 +130,31 @@ footer a:hover{text-decoration:underline;}
   </div>
 </div>
 
-<!-- Example section card -->
+<!-- Experience Section -->
 <div class="section-card btn-shine"><div class="shine-effect"></div>
   <div class="section-title">Experience premium Minecraft hosting</div>
   <div class="section-subtitle">Fast setup, reliable performance, and 24/7 support for the Indian gaming community.</div>
+</div>
+
+<!-- 1-Click Mod & Plugin Install -->
+<div class="section-card btn-shine"><div class="shine-effect"></div>
+  <div class="section-icon">⚡</div>
+  <div class="section-title">1-Click Mod & Plugin Install</div>
+  <div class="section-subtitle">Install your favorite mods and plugins with just one click.</div>
+</div>
+
+<!-- DDoS Protection -->
+<div class="section-card btn-shine"><div class="shine-effect"></div>
+  <div class="section-icon">🛡️</div>
+  <div class="section-title">DDoS Protection</div>
+  <div class="section-subtitle">Advanced protection to keep your server safe and online.</div>
+</div>
+
+<!-- 24/7 Uptime Guarantee -->
+<div class="section-card btn-shine"><div class="shine-effect"></div>
+  <div class="section-icon">🕑</div>
+  <div class="section-title">24/7 Uptime Guarantee</div>
+  <div class="section-subtitle">Your Server Stays online around the clock.</div>
 </div>
 
 </main>
